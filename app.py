@@ -1,6 +1,6 @@
-import streamlit as st
 import pandas as pd
 import plotly.express as px
+import streamlit as st
 
 # --- Configuração da Página ---
 # Define o título da página, o ícone e o layout para ocupar a largura inteira.
@@ -11,7 +11,8 @@ st.set_page_config(
 )
 
 # --- Carregamento dos dados ---
-df = pd.read_csv("https://raw.githubusercontent.com/vqrca/dashboard_salarios_dados/refs/heads/main/dados-imersao-final.csv")
+df = pd.read_csv(
+    "https://raw.githubusercontent.com/vqrca/dashboard_salarios_dados/refs/heads/main/dados-imersao-final.csv")
 
 # --- Barra Lateral (Filtros) ---
 st.sidebar.header("🔍 Filtros")
@@ -22,11 +23,13 @@ anos_selecionados = st.sidebar.multiselect("Ano", anos_disponiveis, default=anos
 
 # Filtro de Senioridade
 senioridades_disponiveis = sorted(df['senioridade'].unique())
-senioridades_selecionadas = st.sidebar.multiselect("Senioridade", senioridades_disponiveis, default=senioridades_disponiveis)
+senioridades_selecionadas = st.sidebar.multiselect("Senioridade", senioridades_disponiveis,
+                                                   default=senioridades_disponiveis)
 
 # Filtro por Tipo de Contrato
 contratos_disponiveis = sorted(df['contrato'].unique())
-contratos_selecionados = st.sidebar.multiselect("Tipo de Contrato", contratos_disponiveis, default=contratos_disponiveis)
+contratos_selecionados = st.sidebar.multiselect("Tipo de Contrato", contratos_disponiveis,
+                                                default=contratos_disponiveis)
 
 # Filtro por Tamanho da Empresa
 tamanhos_disponiveis = sorted(df['tamanho_empresa'].unique())
@@ -39,11 +42,12 @@ df_filtrado = df[
     (df['senioridade'].isin(senioridades_selecionadas)) &
     (df['contrato'].isin(contratos_selecionados)) &
     (df['tamanho_empresa'].isin(tamanhos_selecionados))
-]
+    ]
 
 # --- Conteúdo Principal ---
 st.title("🎲 Dashboard de Análise de Salários na Área de Dados")
-st.markdown("Explore os dados salariais na área de dados nos últimos anos. Utilize os filtros à esquerda para refinar sua análise.")
+st.markdown(
+    "Explore os dados salariais na área de dados nos últimos anos. Utilize os filtros à esquerda para refinar sua análise.")
 
 # --- Métricas Principais (KPIs) ---
 st.subheader("Métricas gerais (Salário anual em USD)")
@@ -80,7 +84,7 @@ with col_graf1:
             title="Top 10 cargos por salário médio",
             labels={'usd': 'Média salarial anual (USD)', 'cargo': ''}
         )
-        grafico_cargos.update_layout(title_x=0.1, yaxis={'categoryorder':'total ascending'})
+        grafico_cargos.update_layout(title_x=0.1, yaxis={'categoryorder': 'total ascending'})
         st.plotly_chart(grafico_cargos, use_container_width=True)
     else:
         st.warning("Nenhum dado para exibir no gráfico de cargos.")
@@ -103,6 +107,20 @@ col_graf3, col_graf4 = st.columns(2)
 
 with col_graf3:
     if not df_filtrado.empty:
+        grafico_senioridade = px.box(
+            df_filtrado,
+            x='senioridade',
+            y='usd',
+            title="Salário por Nível de Senioridade",
+            labels={'usd': 'Salário Anual (USD)', 'senioridade': 'Nível de Senioridade'}
+        )
+        grafico_senioridade.update_layout(title_x=0.1)
+        st.plotly_chart(grafico_senioridade, use_container_width=True)
+    else:
+        st.warning("Nenhum dado para exibir no gráfico de senioridade.")
+
+with col_graf4:
+    if not df_filtrado.empty:
         remoto_contagem = df_filtrado['remoto'].value_counts().reset_index()
         remoto_contagem.columns = ['tipo_trabalho', 'quantidade']
         grafico_remoto = px.pie(
@@ -110,7 +128,7 @@ with col_graf3:
             names='tipo_trabalho',
             values='quantidade',
             title='Proporção dos tipos de trabalho',
-            hole=0.5  
+            hole=0.5
         )
         grafico_remoto.update_traces(textinfo='percent+label')
         grafico_remoto.update_layout(title_x=0.1)
@@ -118,20 +136,20 @@ with col_graf3:
     else:
         st.warning("Nenhum dado para exibir no gráfico dos tipos de trabalho.")
 
-with col_graf4:
-    if not df_filtrado.empty:
-        df_ds = df_filtrado[df_filtrado['cargo'] == 'Data Scientist']
-        media_ds_pais = df_ds.groupby('residencia_iso3')['usd'].mean().reset_index()
-        grafico_paises = px.choropleth(media_ds_pais,
-            locations='residencia_iso3',
-            color='usd',
-            color_continuous_scale='rdylgn',
-            title='Salário médio de Cientista de Dados por país',
-            labels={'usd': 'Salário médio (USD)', 'residencia_iso3': 'País'})
-        grafico_paises.update_layout(title_x=0.1)
-        st.plotly_chart(grafico_paises, use_container_width=True)
-    else:
-        st.warning("Nenhum dado para exibir no gráfico de países.") 
+# --- Gráfico de Salário Médio de Cientista de Dados por País ---
+if not df_filtrado.empty:
+    df_ds = df_filtrado[df_filtrado['cargo'] == 'Data Scientist']
+    media_ds_pais = df_ds.groupby('residencia_iso3')['usd'].mean().reset_index()
+    grafico_paises = px.choropleth(media_ds_pais,
+                                   locations='residencia_iso3',
+                                   color='usd',
+                                   color_continuous_scale='rdylgn',
+                                   title='Salário médio de Cientista de Dados por país',
+                                   labels={'usd': 'Salário médio (USD)', 'residencia_iso3': 'País'})
+    grafico_paises.update_layout(title_x=0.1)
+    st.plotly_chart(grafico_paises, use_container_width=True)
+else:
+    st.warning("Nenhum dado para exibir no gráfico de países.")
 
 # --- Tabela de Dados Detalhados ---
 st.subheader("Dados Detalhados")
