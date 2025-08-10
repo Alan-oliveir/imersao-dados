@@ -2,9 +2,16 @@
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
+<a target="_blank" href="https://www.kaggle.com/datasets/alanogoncalves/salarios-profissionais-dados">
+  <img src="https://kaggle.com/static/images/open-in-kaggle.svg" alt="Open In Kaggle"/>
+</a>
+
 # 📊 Dashboard de Análise de Salários na Área de Dados
 
-Um dashboard interativo desenvolvido com Streamlit para análise e visualização de dados salariais na área de ciência de dados. O projeto permite explorar tendências salariais, comparar diferentes níveis de senioridade, tipos de contrato e distribuições geográficas. O dataset também está disponível no [kaggle](https://www.kaggle.com/datasets/alanogoncalves/salarios-profissionais-dados)
+Um dashboard interativo desenvolvido com Streamlit para análise e visualização de dados salariais na área de ciência de 
+dados. O projeto permite explorar tendências salariais, comparar diferentes níveis de senioridade, tipos de contrato e 
+distribuições geográficas.  
+O dataset também está disponível no [kaggle](https://www.kaggle.com/datasets/alanogoncalves/salarios-profissionais-dados)
 
 ## 🚀 Funcionalidades
 
@@ -52,9 +59,17 @@ streamlit run app.py
 ```
 3. O dashboard será aberto automaticamente no seu navegador (geralmente em `http://localhost:8501`)
 
+## 🚀 Deploy
+O projeto está hospedado no [Streamlit Cloud](https://data-immersion.streamlit.app/).   
+Acesse o link acima para visualizar o dashboard online.
+
+## 📸 Screenshot
+
+![Screenshot do Dashboard](/screenshot/screenshot.png)
+
 ## 📊 Fonte dos Dados
 
-Os dados utilizados são provenientes de uma pesquisa sobre salários na área de ciência de dados, contendo informações sobre:
+Os dados utilizados são provenientes de pesquisas sobre salários nas áreas de dados, contendo informações sobre:
 - Ano de trabalho
 - Nível de senioridade (junior, pleno, senior, executivo)
 - Tipo de contrato (integral, parcial, contrato, freelancer)
@@ -69,8 +84,8 @@ Os dados utilizados são provenientes de uma pesquisa sobre salários na área d
 ```
 imersao-dados/
 │
-├── app.py                    # Aplicação principal do Streamlit
-├── requirements.txt          # Dependências do projeto
+├── app.py                   # Aplicação principal do Streamlit
+├── requirements.txt         # Dependências do projeto
 ├── imersao_dados.ipynb      # Notebook com análise exploratória
 ├── dados-imersao-final.csv  # Dataset processado
 ├── README.md                # Documentação do projeto
