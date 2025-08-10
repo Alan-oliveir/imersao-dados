@@ -1,6 +1,10 @@
+<a target="_blank" href="https://colab.research.google.com/drive/1m1QewCpYhrhEF7F0vaE0ttiyK9extp2e?usp=sharing">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
 # 📊 Dashboard de Análise de Salários na Área de Dados
 
-Um dashboard interativo desenvolvido com Streamlit para análise e visualização de dados salariais na área de ciência de dados. O projeto permite explorar tendências salariais, comparar diferentes níveis de senioridade, tipos de contrato e distribuições geográficas.
+Um dashboard interativo desenvolvido com Streamlit para análise e visualização de dados salariais na área de ciência de dados. O projeto permite explorar tendências salariais, comparar diferentes níveis de senioridade, tipos de contrato e distribuições geográficas. O dataset também está disponível no [kaggle](https://www.kaggle.com/datasets/alanogoncalves/salarios-profissionais-dados)
 
 ## 🚀 Funcionalidades
 
@@ -30,7 +34,7 @@ Um dashboard interativo desenvolvido com Streamlit para análise e visualizaçã
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/imersao-dados.git
+git clone https://github.com/Alan-oliveir/imersao-dados.git
 cd imersao-dados
 ```
 
@@ -104,9 +108,10 @@ Contribuições são bem-vindas! Para contribuir:
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE.md](LICENSE.md) para mais detalhes.
 
-## 👨‍💻 Autor
+## 👨‍💻 Créditos
 
-Desenvolvido como parte de uma imersão em análise de dados com Python.
+Este projeto foi desenvolvido com base na Imersão Dados com Python da [Alura](https://www.alura.com.br/).  
+Link para o projeto original: [app](https://github.com/almeidamarcell/imersao-dados-python-alura-2025) e [ipynb](https://github.com/guilhermeonrails/idcp-alura/blob/A7X3D9/aulas.ipynb)
 
 ---
 
